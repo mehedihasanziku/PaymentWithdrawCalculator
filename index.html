@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formula Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Formula Calculator</h2>
+
+<form id="formulaForm">
+    <label for="input">Input (x|y|T/P):</label>
+    <input type="text" id="input" required>
+    <button type="button" onclick="calculate()">Calculate</button>
+</form>
+
+<p id="result"></p>
+
+<script>
+    function calculate() {
+        // Get the input value
+        const input = document.getElementById('input').value;
+
+        // Split the input into x, y, and formula type
+        const [x, y, type] = input.split('|');
+
+        // Convert x and y to numbers
+        const xNum = parseFloat(x);
+        const yNum = parseFloat(y);
+
+        // Check the formula type and calculate the result
+        let result;
+        if (type === 'T') {
+            result = (xNum * yNum) - (xNum * 0.03) + (xNum * 0.025);
+        } else if (type === 'P') {
+            result = (xNum * yNum) - (xNum * 0.03);
+        } else {
+            document.getElementById('result').innerText = 'Invalid formula type';
+            return;
+        }
+
+        // Display the result
+        document.getElementById('result').innerText = `Result: ${result.toFixed(2)}`;
+    }
+</script>
+
+</body>
+</html>
